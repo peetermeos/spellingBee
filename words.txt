@@ -1,0 +1,47 @@
+english,estonian
+cat,kass
+mum,ema
+dad,isa
+dog,koer
+police,politsei
+tooth,hammas
+teeth,hambad
+shoe,king
+shoes,kingad
+family,perekond
+my,minu
+friend,sõber
+granny,vanaema
+grandad,vanaisa
+brother,vend
+sister,õde
+his,tema oma (meessoost)
+her,tema oma (naissoost)
+these,need (siin)
+are,oled oleme olete on (mitmuses)
+big,suur
+small,väike
+girl,tüdruk
+girls,tüdrukud
+boy,poiss
+boys,poisid
+book,raamat
+ball,pall
+pencil,pliiats
+horse,hobune
+horses,hobused
+new,uus
+bike,jalgratas
+cool,äge vinge
+in,sees sisse
+come,tulema
+say,ütlema
+the,artikkel
+the ABC,tähestik
+so,nii
+beautiful,ilus
+thanks,tänan
+ladybird,lepatriinu
+fairy,haldjas
+tooth fairy,hambahaldjas
+lamb,lambatall

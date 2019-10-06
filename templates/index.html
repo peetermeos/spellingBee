@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sõnade äraarvamise mäng</title>
+    <meta id="my-data"  data-eng="{{word_eng}}" data-est="{{word_est}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap.min.css") }}">
+</head>
+<body>
+<div class="container">
+    <header id="site-header">
+        <div class="row>">
+            <div class="col-md-8 col-sm-5 col-xs-8">
+                <div class="logo">
+                   <h3>
+                       Marleeni inglise keele sõnade harjutamise mäng
+                   </h3>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8">
+                <p>Harjutame inglise keelde tõlkimist</p>
+                <span id="task">
+                </span>
+                on inglise keeles
+                <input type="text" id="word" class="input">
+                <div id="result"> </div>
+            </main>
+            {% include "sidebar.html" %}
+        </div>
+    </div>
+</div>
+
+<script>
+    const Http = new XMLHttpRequest();
+    const url = "/random-word";
+    let word_eng = String(document.getElementById("my-data").getAttribute('data-eng'));
+    let word_est = String(document.getElementById("my-data").getAttribute('data-est'));
+    let counter_right = 0;
+    let counter_wrong = 0;
+
+    document.getElementById("task").innerHTML = '<label for="word"> <b>' + word_est +'</b> </label>';
+    document.getElementById("word").focus();
+
+    let node = document.getElementById("word");
+    node.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.key === "Enter") {
+            const answer = document.getElementById("word").value;
+            let hist = document.getElementById("done-words").innerHTML;
+            if (String(answer) === word_eng){
+                const my_reply = "Õige vastus! " + word_est + " on inglise keeles " +
+                    "<b>" + word_eng + "</b>";
+
+                document.getElementById("done-words").innerHTML = '<p class="text-primary">' +
+                    word_eng + " - " + word_est + "</p>" + hist;
+
+                document.getElementById("result").innerHTML=my_reply;
+                    // '<button type="button" class="btn btn-primary" id="next"  onClick="window.location.reload();">' +
+                //    '<button type="button" class="btn btn-primary" id="next"  onClick="get_random_word();">' +
+                //    'Tubli! Järgmine' +
+                //    '</button>';
+
+                counter_right = counter_right + 1;
+                document.getElementById("counter").innerHTML = "Õigesti on läinud " + counter_right +
+                    " sõna ja valesti on läinud " + counter_wrong + " sõna.";
+            } else {
+                const my_reply = "Proovi veel, õige vastus oli " +
+                    "<b>" + word_eng + "</b> mitte <b>" + answer + "</b><p>";
+
+                document.getElementById("done-words").innerHTML = '<p class="text-danger">' +
+                    word_eng + " - " + word_est + "</p>" + hist;
+
+                document.getElementById("result").innerHTML = my_reply;
+                //    '<button type="button" class="btn btn-primary" id="next" onClick="get_random_word();">' +
+                //    'Järgmine</button>';
+                counter_wrong = counter_wrong + 1;
+            }
+            get_random_word();
+            //document.getElementById("next").focus();
+        } else {
+            const answer = document.getElementById("word").value;
+            let strlen = answer.length;
+            if (!(answer === word_eng.substr(0, strlen))) {
+                document.getElementById("word").style.backgroundColor = "red";
+            } else {
+                document.getElementById("word").style.backgroundColor = "";
+            }
+        }
+    });
+
+    function get_random_word(){
+        Http.open("GET", url);
+        Http.send();
+    }
+
+    Http.onreadystatechange=(e)=>{
+        let word = JSON.parse(Http.responseText);
+        console.log(word);
+        word_eng = word.english;
+        word_est = word.estonian;
+        document.getElementById("task").innerHTML = '<label for="word"> <b>' + word_est +'</b> </label>';
+        //document.getElementById("result").innerHTML = "";
+        document.getElementById("word").value = "";
+        document.getElementById("word").focus();
+    }
+</script>
+</body>
+</html>

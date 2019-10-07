@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4489015-6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-4489015-6');
+    </script>
+
+    <meta charset="UTF-8">
+    <title>Sõnade äraarvamise mäng</title>
+    <meta id="my-data"  data-eng="{{word_eng}}" data-est="{{word_est}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap.min.css") }}">
+</head>
+<body>
+<div class="container">
+    <header id="site-header">
+        <div class="row>">
+            <div class="col-md-8 col-sm-5 col-xs-8">
+                <div class="logo">
+                    <h3>
+                        Marleeni inglise keele sõnade harjutamise mäng
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+{% block content %}
+{% endblock %}
+</body>
+</html>
